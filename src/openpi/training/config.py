@@ -20,7 +20,7 @@ import openpi.models.tokenizer as _tokenizer
 import openpi.policies.aloha_policy as aloha_policy
 import openpi.policies.droid_policy as droid_policy
 import openpi.policies.libero_policy as libero_policy
-import openpi.policies.we_policy as we_policy
+import openpi.policies.yam_policy as yam_policy
 import openpi.shared.download as _download
 import openpi.shared.normalize as _normalize
 import openpi.training.droid_rlds_dataset as droid_rlds_dataset
@@ -318,8 +318,8 @@ class DualYamDataConfig(DataConfigFactory):
         # Prepare data for policy training
         # Convert images to uint8 numpy arrays, add masks
         data_transforms = _transforms.Group(
-            inputs=[we_policy.YamInputs(action_dim=model_config.action_dim, adapt_to_pi=self.adapt_to_pi, model_type=model_config.model_type)],
-            outputs=[we_policy.YamOutputs(adapt_to_pi=self.adapt_to_pi)],
+            inputs=[yam_policy.YamInputs(action_dim=model_config.action_dim, adapt_to_pi=self.adapt_to_pi, model_type=model_config.model_type)],
+            outputs=[yam_policy.YamOutputs(adapt_to_pi=self.adapt_to_pi)],
         )
         if self.use_delta_joint_actions:
             # Left and right arm joints use delta actions, grippers use absolute actions
